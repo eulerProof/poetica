@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content ="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="poetica_logo3.png">
+    <link rel = "stylesheet" type="text/css" href="style.css">
+    <title>Poetica</title>
+</head>
+
+<body>
+    <div class="tab-bar">
+        <nav class="left" id="tab">
+            <ul>
+                <li><img class="logo" src="poetica_logo.png"></li>
+            </ul>    
+        </nav>
+        <nav id="tab" class="center">
+            <ul>
+                <li><a href="" id="selected">Home</a></li>
+                <li><a href="Browse.html">Browse</a></li>
+                <li><a href="Write.html">Write</a></li>
+            </ul>
+        </nav>
+        
+    </div>
+
+
+    <div class="initial">
+        <div>
+            <img src="dice_6.png" class="dice">
+            <p class="initial-title">Poetica</p>
+            <p class="initial-text">Your Personal Poetry Library</p>
+            <p class="initial-subtext">Press the Dice to Get a Random Poem</p>
+        </div>
+    
+    </div>
+    <div class="featured-page">
+        <p class="title-featured">Featured</p><br>
+        <div class="container">      
+            <div class="place"></div>
+        </div>
+        <div class="container">      
+            <div class="place2"></div>
+        </div>
+    </div>
+
+    <script>
+        fetch('https://poetrydb.org/random/4/title,author')
+        .then(response => response.json())
+        .then(res => {
+            console.log(res);
+            res.forEach(name => {
+                const markup = `
+                <div class = "featured-box">
+                    <p>${name.title}</p>
+                    <p>${name.author}</p>
+                </div>
+                `;
+             
+                document.querySelector(".place").insertAdjacentHTML("beforeend", markup);
+            })
+        })
+        .catch(error => console.error(error));
+        fetch('https://poetrydb.org/random/4/title,author')
+        .then(response => response.json())
+        .then(res => {
+            console.log(res);
+            res.forEach(name => {
+                const markup = `
+                <div class = "featured-box">
+                    <p>${name.title}</p>
+                    <p>${name.author}</p>
+                </div>
+                `;
+             
+                document.querySelector(".place2").insertAdjacentHTML("beforeend", markup);
+            })
+        })
+        .catch(error => console.error(error));
+    </script>
+    <footer>
+        <div class="footer">
+            <div class="first-column">
+                <img src="poetica_logo2.png" class="logo">
+                <p class="footer-logo-text">Poetry Library</p>
+            </div>
+            <div class="second-column">
+                <p class="footer-text">Bruh</p>
+                <p class="footer-text">Poetry Library</p>
+                <p class="footer-text">Poetry Library</p>
+            </div>
+        </div>
+    </footer>
+</body>
+
+
+</html>

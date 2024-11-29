@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content ="width=device-width, initial-scale=1">
+    <link rel = "stylesheet" type="text/css" href="style.css">
+    <title>Poem Page</title>
+</head>
+
+<body class="write-page">
+    <div class="tab-bar">
+        <nav class="left" id="tab">
+            <ul>
+                <li><img class="logo" src="poetica_logo.png"></li>
+            </ul>    
+        </nav>
+        <nav id="tab" class="center">
+            <ul>
+                <li><a href="Home.html">Home</a></li>
+                <li><a href="Browse.html">Browse</a></li>
+                <li><a href="" id="selected">Write</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="write-container">
+        <div class="write-title"><p>Write a Poem</p></div>
+        <div class="write-info" id="author-info">
+            <div class="info-label"><p>Author Name: </p></div>
+            <input type="text" class="info-box" id="auth-name">
+        </div>
+        <hr class="line">
+        <div class="write-info" id="title-info">
+            <div class="info-label"><p>Title: </p></div>
+            <input type="text" class="info-box" id="title-name">
+        </div>
+        <div class="write-poem">
+            <textarea type="text" class="poem-box" placeholder="Write text here..." id = "poem"></textarea>
+        </div>
+
+        <button class="submit-button" onclick="submitPoem()">Submit</button><br>
+      
+    </div>
+    <script>
+        function submitPoem() {
+            var auth = document.getElementById("auth-name").value;
+            var title = document.getElementById("title-name").value;
+            var x = document.getElementById("poem").value;
+            console.log(auth);
+            console.log(title);
+            console.log(x);
+        }
+    </script>
+    <footer>
+        <div class="footer">
+            <div class="first-column">
+                <img src="poetica_logo2.png" class="logo">
+                <p class="footer-logo-text">Poetry Library</p>
+            </div>
+            <div class="second-column">
+                <img src="poetica_logo2.png" class="logo">
+                <p class="footer-logo-text">Poetry Library</p>
+            </div>
+        </div>
+    </footer>
+</body>
+
+
+</html>

@@ -1,0 +1,391 @@
+* {
+    margin: 0;
+}
+@font-face {
+    font-family: Kanit;
+    src: url(Kanit-Regular.ttf);
+}
+@font-face {
+    font-family: Kanit-Light;
+    src: url(Kanit-Light.ttf);
+}
+@font-face {
+    font-family: PTSans;
+    src: url(PTSans-Regular.ttf);
+}
+@font-face {
+    font-family: PTSans-Bold;
+    src: url(PTSans-Bold.ttf);
+}
+@font-face {
+    font-family: NotoSans;
+    src: url(NotoSans-Regular.ttf);
+}
+@font-face {
+    font-family: NotoSans-Light;
+    src: url(NotoSans-Light.ttf);
+}
+@font-face {
+    font-family: NotoSans-Thin;
+    src: url(NotoSans-Thin.ttf);
+}
+@font-face {
+    font-family: CormorantGaramond;
+    src: url(CormorantGaramond-Regular.ttf);
+}
+@font-face {
+    font-family: CormorantGaramond-Light;
+    src: url(CormorantGaramond-Light.ttf);
+}
+@font-face {
+    font-family: PlayfairDisplay;
+    src: url(PlayfairDisplay-Regular.ttf);
+}
+.tab-bar, ul, li, a {
+    text-decoration: none;
+    list-style: none;
+    display: inline-block;
+    padding: 9px;
+    font-family: 'PTSans';
+    color: #490707;
+    font-size: 22px;
+}
+#selected {
+    font-weight: bolder;
+}
+.left {
+    float: left;
+    position: fixed;
+    padding-left: 70px;
+}
+.search {
+    position: fixed;
+    padding-left: 500px;
+    align-self: center;
+}
+.center {
+    text-align: center;
+    align-self: center;
+    padding-right: 20px;
+}
+#tab {
+    margin-top: 15px;
+}
+.tab-bar
+{
+    text-align: center;
+    background-color: white;
+    top: 0;
+    position:fixed;
+    height: 90px;
+    width: 99vw;
+    margin: auto;
+}
+.logo {
+    height: 60px;
+}
+.tab-bar a {
+    transition: 0.3s ease;
+}
+.tab-bar a:hover {
+    color: #8B0000;
+}
+.initial {
+    background: white;
+    margin-top: 170px;
+    height: 70vh;
+    text-align: center;
+    justify-content: center;
+    display: flex;
+}
+.initial-title {
+    font-family: 'Kanit';
+    font-weight: 400;
+    font-size: 70px;
+    color: #490707;
+}
+.initial-text {
+    font-size: 36px;
+    font-family: 'NotoSans-Thin';
+    color: black;
+    font-weight: lighter;
+}
+.initial-subtext {
+    font-size: 15px;
+    font-family: 'NotoSans-Light';
+    color: black;
+    font-weight: lighter;
+}
+.dice {
+    height: 200px;
+}
+.featured-page {
+    background:#490707;
+    padding-top: 50px;
+    
+}
+.container {
+   display: flex;
+    padding: 30px;
+    padding-top: 0px;
+    align-items: center;
+    grid-gap: 11px;
+    justify-content: center;
+}
+.place {
+    display: flex;
+}
+.place2 {
+    display: flex;
+}
+.no {
+    padding: 150px;
+    padding-top: 30px;
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: fit-content;
+}
+.te {
+    padding: 150px;
+    padding-top: 30px;
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: fit-content;
+}
+.title-featured {
+    font-weight: bold;
+    font-size: 40px;
+    text-align: center;
+    padding-top: 30px;
+    color: #DFC34B;
+    font-family: 'Kanit';
+}
+.featured-box {
+    height: 300px;
+    width: 200px;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+    border:0.5px solid black;
+    padding: 20px;
+    margin: 20px;
+    background-color: black;
+    color: white;
+}
+.browse-titles {
+    padding-top: 200px;
+    padding-left: 200px;
+    display: inline-flex;
+    align-items:center;
+}
+.browse-title {
+    font-family: 'PTSans-Bold';
+    font-size: 30px;
+    color: #490707;
+}
+.write-page {
+    background-color: #490707;
+}
+.write-container {
+    justify-content: center;
+    text-align: center;
+    width: 800px;
+    justify-self: center;
+    margin-bottom: 500px;
+}
+.write-title {
+    margin-top: 200px;
+    height: 10vh;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    font-family: 'PTSans-Bold';
+    font-size: 40px;
+    color: #DFC34B;
+}
+.write-info {
+    display: inline-flex;
+    width: 800px;
+    background-color: white;
+    height: 65px;
+}
+.write-poem {
+    width: 680px;
+    padding: 60px;
+    display: inline-flex;
+    flex-wrap: wrap;
+    background-color: white;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    justify-content: center;
+}
+.submit-button {
+    padding: 10px;
+    background-color: #DFC34B;
+    color: #490707;
+    font-family: 'PTSans-Bold';
+    font-size: 24px;
+    width: 230px;
+    float: right;
+    border-radius: 10px;
+}
+#author-info {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+#title-info {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    margin-bottom: 35px;
+}
+.info-label {
+    width: 100px;
+    display: flex;
+    padding-left: 40px;
+    align-items: center;
+    font-family: 'NotoSans';
+    font-size: 15px;
+}
+.info-box {
+    margin-left: 20px;
+    border: 0;
+    width: 600px;
+    font-family: 'NotoSans';
+    font-size: 15px;
+}
+.poem-box {
+    border: 0;
+    width: 1000px;
+    height: 400px;
+    font-family: 'NotoSans';
+    font-size: 15px;
+}
+.poem-box:focus {
+    outline: none;
+}
+.info-box:focus {
+    outline: none;
+}
+.line {
+    width: 799px;
+    justify-self: center;
+    color: #CACACA;
+}
+.tesst {
+    display: flex;
+    flex-wrap: wrap;
+}
+.sort {
+    padding-left: 50px;
+    
+}
+.sort-label {
+    font-size: 20px;
+    font-family: 'NotoSans-Light';
+}
+.sort-select {
+    padding: 10px;
+    border-radius: 10px;
+    align-self: center;
+    margin-left: 10px;
+    width: 160px;
+    font-family: 'NotoSans-Light';
+}
+.browse-library {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: fit-content;
+    
+}
+.n {
+    width: 99vw;
+    align-items: center;
+    justify-content: center;
+    display: inline-block;
+}
+.poempage {
+    background-color: black;
+}
+.poem-title { 
+    font-family:'PlayfairDisplay';
+    font-size: 70px;
+    color: #490707;
+    
+}
+.poem-author {
+    font-size: 25px;
+    font-family: 'NotoSans-Light';
+    color: black;
+    font-weight: lighter;
+}
+.poem-display {
+    
+    padding-bottom: 0;
+    padding-top: 100px;
+    display: flex;
+
+}
+.poem-column-1 {
+    width: 44vw;
+
+    padding-top: 80px;
+    padding-right: 50px;
+    padding-left: 150px;
+    padding-bottom: 100px;
+    background-color: white;
+}
+.poem-column-2 {
+    background-color: black;
+    justify-content: center;
+    display: flex;
+    padding-left: 47px;
+}
+.poem {
+    float: right;
+    padding: 140px;
+    padding-top: 110px;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: lighter;
+    font-family:'CormorantGaramond-Light';
+    color: white;  
+}
+
+.footer {
+    height: 27vh;
+    background-color: black;
+    display: flex;
+    bottom: 0;
+}
+.first-column {
+    align-items: center;
+    width: 300px;
+    padding-bottom: 0;
+    justify-content: center;
+    padding-top: 50px;
+    margin-left: 140px;
+}
+.second-column {   
+    align-items: center;
+    width: 300px;
+    padding-bottom: 0;
+    padding-top: 50px;
+    text-align: center;
+}
+.footer-logo-text {
+    font-size: 33px;
+    font-family: 'NotoSans-Light';
+    color: #6F6F6F;
+
+    font-weight: lighter;
+}
+.footer-text {
+    font-size: 15px;
+    font-family: 'NotoSans-Light';
+    color: #6F6F6F;
+
+    font-weight: lighter;
+}

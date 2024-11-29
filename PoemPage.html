@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content ="width=device-width, initial-scale=1">
+    <link rel = "stylesheet" type="text/css" href="style.css">
+    <title>Poem Page</title>
+</head>
+
+<body class="poempage">
+    <div class="tab-bar">
+        <nav class="left" id="tab">
+            <ul>
+                <li><img class="logo" src="poetica_logo.png"></li>
+            </ul>    
+        </nav>
+        <nav id="tab" class="center">
+            <ul>
+                <li><a href="Home.html">Home</a></li>
+                <li><a href="Browse.html" id="selected">Browse</a></li>
+                <li><a href="">Write</a></li>
+            </ul>
+        </nav>
+    </div>
+
+
+    
+    <div class="poem-display">
+        <div class="poem-column-1">
+            <div class="poem-title"><p id= "poem-title">Title</p></div>
+            <p class="poem-author" id = "poem-author">By Author Name</p>
+        </div>
+        <div class="poem-column-2">
+            <div class="poem">
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+       
+            var a = localStorage.getItem('value');
+            document.getElementById("poem-title").innerHTML = a;
+            console.log(a);
+            var title = a;
+            var author = "";
+            fetch(`https://poetrydb.org/title/${a}`)
+            .then(response => response.json())
+            .then(res => {
+            console.log(res);
+            
+            res.forEach(element => {
+                author = element.author;
+                console.log(element.linecount);
+                console.log(author);
+                
+                for (let i = 0; i < element.lines.length; i++) {
+                    const markup = `      
+                    <p>${element.lines[i]}</p>                          
+                `
+                document.querySelector(".poem").insertAdjacentHTML("beforeend", markup);
+                }
+                
+                
+            });
+            document.getElementById("poem-author").innerHTML = "By " + author;
+           
+        }
+        )
+    </script>
+    <footer>
+        <div class="footer">
+            <div class="first-column">
+                <img src="poetica_logo2.png" class="logo">
+                <p class="footer-logo-text">Poetry Library</p>
+            </div>
+            <div class="second-column">
+                <img src="poetica_logo2.png" class="logo">
+                <p class="footer-logo-text">Poetry Library</p>
+            </div>
+        </div>
+    </footer>
+</body>
+
+
+</html>

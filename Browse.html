@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content ="width=device-width, initial-scale=1">
+    <link rel = "stylesheet" type="text/css" href="style.css">
+    <title>Browse</title>
+</head>
+
+<body>
+    <div class="tab-bar">
+        <nav class="left" id="tab">
+            <ul>
+                <li><img class="logo" src="poetica_logo.png"></li>
+            </ul>    
+        </nav>
+        <nav id="tab" class="center">
+            <ul>
+                <li><a href="Home.html">Home</a></li>
+                <li><a href="" id="selected">Browse</a></li>
+                <li><a href="Write.html">Write</a></li>
+                <li><img src="search.png" class="search"></li>
+            </ul>
+        </nav>
+    </div>
+
+
+
+    <div class="browse-titles">
+        <div><p class="browse-title">Browse Library</p></div>
+        <div class="sort"><p class="sort-label">Sort By</p> </div>
+        <select class="sort-select" id="sort-select" onchange="changeValue()">
+            <option value="alphabetical" id="alp">A - Z</option>
+            <option value="author" id="auth">Author</option>
+            <option value="linecount">Length</option>
+        </select>
+        
+    </div>
+
+    <div class="browse-library">
+        <div class="no" id="test"></div>
+    </div>
+    <script>
+        
+        var selectValue = String(document.getElementById("sort-select").value);
+        var op1 = document.getElementById("alp").value;
+        document.getElementById("sort-select").value = op1;
+        var op2 = document.getElementById("auth").value;
+        console.log(selectValue);
+        console.log(op2);
+        function changeValue() {
+            selectValue = document.getElementById("sort-select").value;
+            console.log(selectValue);
+            if (selectValue == op1) {
+                document.getElementById("test").innerHTML = "";
+
+                fetch('https://poetrydb.org/title')
+                .then(response => response.json())
+                .then(res => {
+                console.log(res);
+            
+                for (let i = 0; i < res.titles.length; i++){
+                    var author = "";
+                    var x = JSON.stringify(res.titles[i]);
+                    if (x.includes("\'")) {
+                        continue;
+                    } else {
+                        const markup = `
+                            <div class = "featured-box" onclick = 'sendValue(${x})'>
+                                <p>${res.titles[i]}</p>
+                            </div>               
+                        `;
+             
+                    document.querySelector(".no").insertAdjacentHTML("beforeend", markup);
+                    }     
+                }})
+                .catch(error => console.error(error));
+            }
+            else if (selectValue == op2) {
+                document.getElementById("test").innerHTML = "";
+                fetch('https://poetrydb.org/authors')
+                .then(response => response.json())
+                .then(res => {
+                console.log(res);
+                      
+                for (let i = 0; i < res.authors.length; i++){
+                    var auth = res.authors[i];   
+                        fetch(`https://poetrydb.org/author/${auth}/author,title`)
+                        .then(res => res.json())
+                        .then(re => {
+                            re.forEach(e => {
+                                var x = JSON.stringify(e.title);
+                                if(x.includes("\'")) {
+                                    
+                                } else {
+                                    const te = `  
+                                <div class = "featured-box" onclick = 'sendValue(${x})'>
+                                <p>${e.title}</p>
+                                <p>Author: ${e.author}</p>
+                                </div>  `   
+                                document.querySelector(".no").insertAdjacentHTML("beforeend", te);
+                                }
+                                
+                            });
+                        })
+                        
+                     
+                }})
+                
+            }
+        }
+        changeValue();
+       
+        function sendValue(x) {
+            try {
+                var a = x;
+                console.log(a);
+                localStorage.setItem('value', a);
+                window.location.href="PoemPage.html";
+            } catch(err) {
+                window.location.href="NotFound.html";
+            }
+        }
+        
+
+        
+    </script>
+    <footer>
+        <div class="footer">
+            <div class="first-column">
+                <img src="poetica_logo2.png" class="logo">
+                <p class="footer-logo-text">Poetry Library</p>
+            </div>
+            <div class="second-column">
+                <img src="poetica_logo2.png" class="logo">
+                <p class="footer-logo-text">Poetry Library</p>
+            </div>
+        </div>
+    </footer>
+</body>
+
+
+</html>
