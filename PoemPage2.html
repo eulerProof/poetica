@@ -8,7 +8,7 @@
     <title>Poem Page</title>
 </head>
 
-<body class="poempage">
+<body>
     <div class="tab-bar">
         <nav class="left" id="tab">
             <ul>
@@ -22,56 +22,55 @@
                 <li><a href="Browse.php">Browse</a></li>
                 <li><a href="Write.html">Write</a></li>
                 <li><div class="search-bar-full"><input type="text" class="search-bar" placeholder="Search" id="search-bar"><button class="search-button" onclick="sendSearch()"><img src="search.png" class="search"></button></div></li>
+
             </ul>
         </nav>
     </div>
 
 
     
-    <div class="poem-display">
-        <div class="poem-column-1">
-            <div class="poem-title"><p id= "poem-title">Title</p></div>
-            <p class="poem-author" id = "poem-author">By Author Name</p>
-        </div>
-        <div class="poem-column-2">
-            <div class="poem">
+    <div class="poem-display2">
+        <div class="poem-title2"><p id= "poem-title">Title</p><p class="poem-author" id = "poem-author">By Author Name</p> </div>
+        
+        <div class="poem2-box">
+            <div class="poem2">
 
             </div>
         </div>
-    </div>
-    <script src="Functions.js">
         
-    </script>
+       
+    </div>
+    <script src="Functions.js"></script>
     <script>
        
             var a = localStorage.getItem('value');
-
-                document.getElementById("poem-title").innerHTML = a;
-                console.log(a);
-                var title = a;
-                var author = "";
-                fetch(`https://poetrydb.org/title/${a}`)
-                .then(response => response.json())
-                .then(res => {
-                console.log(res);
+            document.getElementById("poem-title").innerHTML = a;
+            console.log(a);
+            var title = a;
+            var author = "";
+            fetch(`https://poetrydb.org/title/${a}`)
+            .then(response => response.json())
+            .then(res => {
+            console.log(res);
+            
+            res.forEach(element => {
+                author = element.author;
+                console.log(element.linecount);
+                console.log(author);
                 
-                res.forEach(element => {
-                    author = element.author;
-                    console.log(element.linecount);
-                    console.log(author);
-                    
-                    for (let i = 0; i < element.lines.length; i++) {
-                        const markup = `      
-                        <p>${element.lines[i]}</p>                          
-                    `
-                    document.querySelector(".poem").insertAdjacentHTML("beforeend", markup);
-                    }
-                    
-                    
-                });
-                    document.getElementById("poem-author").innerHTML = "By " + author;
-                })
-    
+                for (let i = 0; i < element.lines.length; i++) {
+                    const markup = `      
+                    <p>${element.lines[i]}</p>                          
+                `
+                document.querySelector(".poem2").insertAdjacentHTML("beforeend", markup);
+                }
+                
+                
+            });
+            document.getElementById("poem-author").innerHTML = "By " + author;
+           
+        }
+        )
     </script>
     <footer>
         <div class="footer">

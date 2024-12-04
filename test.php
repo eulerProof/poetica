@@ -32,6 +32,7 @@
         <div class="poem-column-1">
             <div class="poem-title"><p id= "poem-title">Title</p></div>
             <p class="poem-author" id = "poem-author">By Author Name</p>
+            <button class="delete-poem" onclick="deletePoem()">Delete Poem</button>
         </div>
         <div class="poem-column-2">
             <div class="poem">
@@ -43,35 +44,34 @@
         
     </script>
     <script>
-       
-            var a = localStorage.getItem('value');
+        var a = localStorage.getItem('value');
+            <?php
+                $connection = new mysqli('localhost', 'root', '', 'poems');
+                if ($connection->connect_error) {
+                    die('Connection Failed! : '.$connection->connect_error);
+                }
+                    $id = $_GET['uid'];
+                    $sql = "SELECT * FROM poem WHERE poem_ID = $id"; 
+                    $result = $connection->query($sql);
 
-                document.getElementById("poem-title").innerHTML = a;
-                console.log(a);
-                var title = a;
-                var author = "";
-                fetch(`https://poetrydb.org/title/${a}`)
-                .then(response => response.json())
-                .then(res => {
-                console.log(res);
-                
-                res.forEach(element => {
-                    author = element.author;
-                    console.log(element.linecount);
-                    console.log(author);
-                    
-                    for (let i = 0; i < element.lines.length; i++) {
-                        const markup = `      
-                        <p>${element.lines[i]}</p>                          
-                    `
-                    document.querySelector(".poem").insertAdjacentHTML("beforeend", markup);
+                    while($row = $result->fetch_assoc()) {
+            ?>          document.getElementById("poem-title").innerHTML = "<?php echo $row["poem_title"]; ?>";
+                        document.getElementById("poem-author").innerHTML = "By " + "<?php echo $row["poem_author"]; ?>";
+
+                        const markup = `<?php echo nl2br($row["poem_contents"])?>`;
+                        document.querySelector(".poem").insertAdjacentHTML("beforeend", markup);        
+                    <?php        
                     }
-                    
-                    
-                });
-                    document.getElementById("poem-author").innerHTML = "By " + author;
-                })
-    
+                ?> 
+            
+        function deletePoem() {
+            if(confirm("Are you sure you wish to delete this poem? This is irreversible.") == true) {
+                //code sa delete
+                window.location.href="Delete Success.php?uid=" + <?php echo $id ?>;
+            } else {
+                alert("Poem NOT Deleted");
+            }
+        }
     </script>
     <footer>
         <div class="footer">

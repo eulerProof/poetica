@@ -62,7 +62,6 @@
         
         function changeValue() {
             selectValue = document.getElementById("sort-select").value;
-            console.log(selectValue);
             if (selectValue == op1) {
                 document.getElementById("test").innerHTML = "";
 
@@ -166,7 +165,35 @@
             }
 
             else if (selectValue == op4) {
-                
+                document.getElementById("test").innerHTML = "";
+                <?php
+                    $connection = new mysqli('localhost', 'root', '', 'poems');
+                    if ($connection->connect_error) {
+                       die('Connection Failed! : '.$connection->connect_error);
+                   }
+                   
+                   $sql = "SELECT * FROM poem";
+                   $result = $connection->query($sql);
+
+                   while($row = $result->fetch_assoc()) {
+                        ?>
+                            console.log(<?php $row["poem_title"]; ?>)
+                            var a = "";
+                            var x = Math.floor(parseInt(<?php echo $row["poem_ID"]?>));
+                            a = `  
+                                <div class = "featured-box"  onclick = sendValue(${x})> 
+                                    <div class="poem-box-title" >
+                                        <p><?php echo $row["poem_title"]?></p>
+                                        <p>Author: <?php echo $row["poem_author"]?></p>
+                                        
+                                    </div>
+                                        
+                            </div>  `   
+                            document.querySelector(".no").insertAdjacentHTML("beforeend", a);
+                        <?php
+                   }
+
+                ?>
             }
         }
         changeValue();          

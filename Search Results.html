@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content ="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="poetica_logo3.png">
+    <link rel = "stylesheet" type="text/css" href="style.css">
+    <title>Browse</title>
+</head>
+
+<body>
+    <div class="tab-bar">
+        <nav class="left" id="tab">
+            <ul>
+                <li><a href="Home.html" class="logo"><img class="logo" src="poetica_logo.png"></a></li>
+            </ul>    
+        </nav>
+        <div class="blank"></div>
+        <nav id="tab" class="center">
+            <ul>
+                <li><a href="Home.html">Home</a></li>
+                <li><a href="Browse.php">Browse</a></li>
+                <li><a href="Write.html">Write</a></li>
+                <li><div class="search-bar-full"><input type="text" class="search-bar" placeholder="Search" id="search-bar"><button class="search-button" onclick="searchReset()"><img src="search.png" class="search"></button></div></li>
+
+            </ul>
+            
+        </nav>
+    </div>
+
+
+    <!--This is where the contents will be-->
+    <div class="search-results">
+        <p class="search-results-title" id="search-details">Search Results</p>
+        <p class="search-results-number" id="search-number">Result Count</p>
+        <div class="search-results-bar">
+            <div class="search-results-tab" id="selected-search-tab">
+                <p>Poem</p>
+                <div class="search-tab-selected"></div>
+            </div>
+            <div class="search-results-tab">
+                <p>Authors</p>
+            </div>
+        </div>
+        
+        <div class="search-results-display" id="search-results">
+
+        </div>
+
+    </div>
+    
+    <script>
+        getTitleResults();
+        function searchReset() {
+            document.getElementById("search-results").innerHTML = "";
+            localStorage.setItem('searchPrompt', document.getElementById("search-bar").value)
+            getResults();
+        }
+        function getTitleResults() {
+            var searchPrompt = removeHTMLTags(localStorage.getItem('searchPrompt'));
+            
+            
+            document.getElementById("search-bar").value = searchPrompt;
+            document.title = searchPrompt  + " - Poetica";
+            fetch(`https://poetrydb.org/title/${searchPrompt}/title`)
+            .then(response => response.json())
+            .then(res => {
+            console.log(res);
+            var i = 0;
+            document.getElementById("search-details").innerHTML = searchPrompt; 
+            document.getElementById("search-number").innerHTML = 0 + " results";
+            res.forEach(e => {
+                
+                var title = JSON.stringify(e.title);
+                    if (title.includes("\'")) {
+                        
+                    } else {
+                        const markup = `
+                        <div class = "featured-box" onclick='sendValue(${title})'>
+                            <div class="poem-box-title">
+                            <p>${e.title}</p>
+                            </div>
+                        </div>
+                        `;
+                        document.querySelector(".search-results-display").insertAdjacentHTML("beforeend", markup);
+                        i +=1;
+                    }   
+                    
+                    document.getElementById("search-details").innerHTML = searchPrompt; 
+                    document.getElementById("search-number").innerHTML = i + " results";
+            })
+        }).catch (err =>
+        document.querySelector(".search-results-display").insertAdjacentHTML("beforeend", '<div class="error-container" id="no-results"><p class="error-text">No Results</p></div>')
+        )
+            
+       
+        }
+        function sendValue(x) {
+            try {
+                var a = x;
+                console.log(a);
+                localStorage.setItem('value', a);
+                window.location.href="PoemPage.html";
+            } catch(err) {
+                window.location.href="NotFound.html";
+            }
+        }
+        function removeHTMLTags(string) {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(string, 'text/html');
+            const textContent = doc.body.textContent || "";
+            return textContent.trim();
+        }
+    </script>
+    <footer>
+        <div class="footer">
+            <div class="first-column">
+                <img src="poetica_logo2.png" class="logo">
+                <p class="footer-logo-text">Poetry Library</p>
+            </div>
+            
+        </div>
+        <p style="display: none;" id="somewhere">
+            
+        </p>
+    </footer>
+</body>
+
+
+</html>

@@ -11,14 +11,16 @@
     <div class="tab-bar">
         <nav class="left" id="tab">
             <ul>
-                <li><img class="logo" src="poetica_logo.png"></li>
+                <li><a href="Home.html" class="logo"><img class="logo" src="poetica_logo.png"></a></li>
             </ul>    
         </nav>
+        <div class="blank"></div>
         <nav id="tab" class="center">
             <ul>
                 <li><a href="" id="selected">Home</a></li>
-                <li><a href="Browse.html">Browse</a></li>
+                <li><a href="Browse.php">Browse</a></li>
                 <li><a href="Write.html">Write</a></li>
+                <li><div class="search-bar-full"><input type="text" class="search-bar" placeholder="Search" id="search-bar"><button class="search-button" onclick="sendSearch()"><img src="search.png" class="search"></button></div></li>
             </ul>
         </nav>
         
@@ -27,7 +29,7 @@
 
     <div class="initial">
         <div>
-            <img src="dice_6.png" class="dice">
+            <img src="dice_6.png" class="dice" onclick="getRandom()" id="dice">
             <p class="initial-title">Poetica</p>
             <p class="initial-text">Your Personal Poetry Library</p>
             <p class="initial-subtext">Press the Dice to Get a Random Poem</p>
@@ -39,44 +41,56 @@
         <div class="container">      
             <div class="place"></div>
         </div>
-        <div class="container">      
-            <div class="place2"></div>
-        </div>
     </div>
+    <script src="Functions.js">
 
+    </script>
     <script>
-        fetch('https://poetrydb.org/random/4/title,author')
+        randomDice();
+        fetch('https://poetrydb.org/random/8/title,author')
         .then(response => response.json())
         .then(res => {
+            res.forEach(name => {
+                var title = JSON.stringify(name.title);
+                    if (title.includes("\'")) {
+                        
+                    } else {
+                        const markup = `
+                        <div class = "featured-box" onclick='sendValue(${title})'>
+                            <div class="poem-box-title">
+                            <p>${name.title}</p>
+                            <p>Author: ${name.author}</p>
+                            </div>
+                        </div>
+                        `;
+                        document.querySelector(".place").insertAdjacentHTML("beforeend", markup);
+                    }   
+            })
+        })
+        .catch(error => 
+            document.querySelector(".place").insertAdjacentHTML("beforeend", '<div><img src="no-wifi.png" class="no-wifi"><p class="error-text">Connection Error</p></div>')
+        )
+        
+        function getRandom() {
+            fetch('https://poetrydb.org/random/10/title')
+            .then(response => response.json())
+            .then(res => {
             console.log(res);
             res.forEach(name => {
-                const markup = `
-                <div class = "featured-box">
-                    <p>${name.title}</p>
-                    <p>${name.author}</p>
-                </div>
-                `;
-             
-                document.querySelector(".place").insertAdjacentHTML("beforeend", markup);
+                
+                var prevTitle;
+                if (name.title.includes("\'")) {
+                    
+                } else {
+                    var title = JSON.stringify(name.title);
+                    sendValue(name.title);
+                }
+                console.log(title);
+                
             })
         })
         .catch(error => console.error(error));
-        fetch('https://poetrydb.org/random/4/title,author')
-        .then(response => response.json())
-        .then(res => {
-            console.log(res);
-            res.forEach(name => {
-                const markup = `
-                <div class = "featured-box">
-                    <p>${name.title}</p>
-                    <p>${name.author}</p>
-                </div>
-                `;
-             
-                document.querySelector(".place2").insertAdjacentHTML("beforeend", markup);
-            })
-        })
-        .catch(error => console.error(error));
+        }
     </script>
     <footer>
         <div class="footer">
@@ -84,11 +98,7 @@
                 <img src="poetica_logo2.png" class="logo">
                 <p class="footer-logo-text">Poetry Library</p>
             </div>
-            <div class="second-column">
-                <p class="footer-text">Bruh</p>
-                <p class="footer-text">Poetry Library</p>
-                <p class="footer-text">Poetry Library</p>
-            </div>
+            
         </div>
     </footer>
 </body>
